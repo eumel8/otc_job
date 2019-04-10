@@ -1,4 +1,5 @@
 - name: Request job status from  API
+  delegate_to: "{{ delegateto }}"
   uri:
     url: "{{ AUTH_URL_ECS_CLOUD }}/{{ PROJECT_ID }}/jobs/{{ job_id }}"
     method: GET
@@ -16,5 +17,6 @@
   when: job_id is defined
 
 - debug:
+  delegate_to: "{{ delegateto }}"
     msg: "{{ jobstatus.json }}"
   when: jobstatus is defined and jobstatus.content|length != 0
