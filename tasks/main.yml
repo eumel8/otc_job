@@ -3,7 +3,7 @@
   uri:
     url: "{{ AUTH_URL_ECS_CLOUD }}/{{ PROJECT_ID }}/jobs/{{ job_id }}"
     method: GET
-    return_content: yes
+    return_content: true
     follow_redirects: "{{ uri_follow_redirects }}"
     validate_certs: "{{ uri_validate_certs }}"
     headers:
@@ -17,6 +17,6 @@
   when: job_id is defined
 
 - debug:
-  delegate_to: "{{ delegateto }}"
     msg: "{{ jobstatus.json }}"
+  delegate_to: "{{ delegateto }}"
   when: jobstatus is defined and jobstatus.content|length != 0
